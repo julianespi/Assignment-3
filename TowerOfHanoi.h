@@ -1,24 +1,94 @@
 #pragma once
-#include<stack>
-using namespace std;
 
-void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
+bool checkIfComplete(stack<int> pegC,int numberOfdisk)
+{
+	bool isComplete = false;
+
+	stack<int> winningStack;
+	stack<int> temp = pegC;
+
+	for (int i = numberOfdisk; i > 0; i--)
+	{
+		winningStack.push(i);
+	}
+	int stackSize = winningStack.size();
+	if (temp.size() == winningStack.size())
+	{
+		for (int i = 0; i < stackSize; i++)
+		{
+			if (temp.top() == winningStack.top())
+			{
+				
+				temp.pop();
+				winningStack.pop();
+				isComplete = true;
+			}
+			else
+			{
+				isComplete = false;
+				break;
+			}
+		}
+	}
+	return isComplete;
+}
+
+void DisplayTowers(stack<int> pegA, stack<int> pegB, stack<int> pegC)
+{
+	stack<int> temp;
+
+
+	temp = pegA;
+	cout << "tower 1: ";
+	for (int i = 0; i < pegA.size(); i++)
+	{
+		cout << temp.top() << " ";
+		temp.pop();
+	}
+	cout << endl;
+
+	temp = pegB;
+	cout << "tower 2: ";
+	for (int i = 0; i < pegB.size(); i++)
+	{
+		cout << temp.top() << " ";
+		temp.pop();
+	}
+	cout << endl;
+
+	temp = pegC;
+	cout << "tower 3: ";
+	for (int i = 0; i < pegC.size(); i++)
+	{
+		cout << temp.top() << " ";
+		temp.pop();
+	}
+	cout << endl;
+}
+
+void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC, int numberOfdisk)
 {
 
 	do
 	{
-		int option1 = inputInteger("Enter the peg you want to move a disk from(1 = A, 2 = B, 3 = C, 4 = Q): ", 1, 4);
-		int option2 = inputInteger("Enter the peg you want to move a disk to(1 = A, 2 = B, 3 = C, 4 = Q): ", 1, 4);
+		DisplayTowers(pegA, pegB, pegC);
 
-		if (option1 == 4 || option2 == 4)
+		int option1 = inputInteger("Enter the peg you want to move a disk from(1 = A, 2 = B, 3 = C, 4 to Quit): ", 1, 4);
+		if (option1 == 4 )
 		{
 			return;
 		}
+		int option2 = inputInteger("Enter the peg you want to move a disk to(1 = A, 2 = B, 3 = C, 4 to Quit): ", 1, 4);
+		if (option2 == 4)
+		{
+			return;
+		}
+
 		else if (option1 == 1 && option2 == 1)
 		{
-			if (pegA.size() == 0 && pegA.size() == 0)
+			if (pegA.size() == 0)
 			{
-				cout << "Pillars are empyt..." << endl;
+				cout << "Pillar is empyt..." << endl;
 			}
 			else if (pegA.size() == 0 || pegA.top() > pegA.top())
 			{
@@ -30,9 +100,9 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
 		}
 		else if (option1 == 1 && option2 == 2)
 		{
-			if (pegA.size() == 0 && pegB.size() == 0)
+			if (pegA.size() == 0)
 			{
-				cout << "Pillars are empyt..." << endl;
+				cout << "Pillar is empyt..." << endl;
 			}
 			else if (pegB.size() == 0 || pegB.top() > pegA.top())
 			{
@@ -43,9 +113,9 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
 		}
 		else if (option1 == 1 && option2 == 3)
 		{
-			if (pegA.size() == 0 && pegC.size() == 0)
+			if (pegA.size() == 0)
 			{
-				cout << "Pillars are empyt..." << endl;
+				cout << "Pillar is empyt..." << endl;
 			}
 			else if (pegC.size() == 0 || pegC.top() > pegA.top())
 			{
@@ -56,9 +126,9 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
 		}
 		else if (option1 == 2 && option2 == 1)
 		{
-			if (pegB.size() == 0 && pegA.size() == 0)
+			if (pegB.size() == 0)
 			{
-				cout << "Pillars are empyt..." << endl;
+				cout << "Pillar is empyt..." << endl;
 			}
 			else if (pegA.size() == 0 || pegA.top() > pegB.top())
 			{
@@ -69,11 +139,11 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
 		}
 		else if (option1 == 2 && option2 == 2)
 		{
-			if (pegB.size() == 0 && pegB.size() == 0)
+			if (pegB.size() == 0)
 			{
-				cout << "Pillars are empyt..." << endl;
+				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegA.size() == 0 || pegB.top() > pegB.top())
+			else if (pegB.size() == 0 || pegB.top() > pegB.top())
 			{
 				pegB.push(pegB.top());
 				pegB.pop();
@@ -82,11 +152,11 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
 		}
 		else if (option1 == 2 && option2 == 3)
 		{
-			if (pegB.size() == 0 && pegC.size() == 0)
+			if (pegB.size() == 0 )
 			{
-				cout << "Pillars are empyt..." << endl;
+				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegA.size() == 0 || pegC.top() > pegB.top())
+			else if (pegC.size() == 0 || pegC.top() > pegB.top())
 			{
 				pegC.push(pegB.top());
 				pegB.pop();
@@ -95,9 +165,9 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
 		}
 		else if (option1 == 3 && option2 == 1)
 		{
-			if (pegC.size() == 0 && pegA.size() == 0)
+			if (pegC.size() == 0)
 			{
-				cout << "Pillars are empyt..." << endl;
+				cout << "Pillar is empyt..." << endl;
 			}
 			else if (pegA.size() == 0 || pegA.top() > pegC.top())
 			{
@@ -106,26 +176,26 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
 			}
 
 		}
-		else if (option1 == 3 && option2 == 2)
+		else if (option1 == 3)
 		{
-			if (pegC.size() == 0 && pegB.size() == 0)
+			if (pegC.size() == 0 )
 			{
-				cout << "Pillars are empyt..." << endl;
+				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegA.size() == 0 || pegB.top() > pegC.top())
+			else if (pegB.size() == 0 || pegB.top() > pegC.top())
 			{
 				pegB.push(pegC.top());
 				pegC.pop();
 			}
 
 		}
-		else if (option1 == 3 && option2 == 3)
+		else if (option1 == 3)
 		{
-			if (pegC.size() == 0 && pegC.size() == 0)
+			if (pegC.size() == 0 )
 			{
 				cout << "Pillars are empyt..." << endl;
 			}
-			else if (pegA.size() == 0 || pegC.top() > pegC.top())
+			else if (pegC.size() == 0 || pegC.top() > pegC.top())
 			{
 				pegC.push(pegC.top());
 				pegC.pop();
@@ -133,9 +203,17 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC)
 
 		}
 
+		if (checkIfComplete(pegC, numberOfdisk))
+		{
+			cout << " YOU WON!!!" << endl;
+		}
+
 		cout << endl;
 	} while (true);
 }
+
+
+
 
 
 void towerOfHanoi()
@@ -151,5 +229,7 @@ void towerOfHanoi()
 		pegA.push(i);
 	}
 
-	moveFunction(pegA, pegB, pegC);
+
+	moveFunction(pegA, pegB, pegC, numberOfdisk);
 }
+
