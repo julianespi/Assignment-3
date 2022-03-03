@@ -5,7 +5,7 @@
 #include <Windows.h>
 #include <iomanip>
 #include "TTT_Wesley.h"
-
+//Currently entirely broken, requires revision to work as a cpp file with a class header
 using namespace std;
 
 cout << "Thank you for playing Tic-Tac-Toe." << endl << endl;
