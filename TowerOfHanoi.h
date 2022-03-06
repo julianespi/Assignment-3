@@ -33,48 +33,43 @@ bool checkIfComplete(stack<int> pegC,int numberOfdisk)
 	return isComplete;
 }
 
-void DisplayTowers(stack<int> pegA, stack<int> pegB, stack<int> pegC)
+void resetTowerOfHanoi(stack<int> &pegA, stack<int> &pegC)
 {
-	stack<int> temp;
+	int size = pegC.size();
+	for (int i = 0; i < size; i++)
+		pegC.pop();
 
+	int numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
 
-	temp = pegA;
-	cout << "tower 1: ";
-	for (int i = 0; i < pegA.size(); i++)
+	for (int i = numberOfdisk; i > 0; i--)
 	{
-		cout << temp.top() << " ";
-		temp.pop();
+		pegA.push(i);
 	}
-	cout << endl;
 
-	temp = pegB;
-	cout << "tower 2: ";
-	for (int i = 0; i < pegB.size(); i++)
-	{
-		cout << temp.top() << " ";
-		temp.pop();
-	}
-	cout << endl;
-
-	temp = pegC;
-	cout << "tower 3: ";
-	for (int i = 0; i < pegC.size(); i++)
-	{
-		cout << temp.top() << " ";
-		temp.pop();
-	}
-	cout << endl;
 }
 
-void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC, int numberOfdisk)
+void towerOfHanoi()
 {
+	stack<int> pegA;
+	stack<int> pegB;
+	stack<int> pegC;
+	int numberOfMoves = 0;
+	auto start = chrono::steady_clock::now();
+	char doAgain;
+
+	int numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
+
+	for(int i = numberOfdisk; i > 0; i--)
+	{
+		pegA.push(i);
+	}
 
 	do
 	{
 		DisplayTowers(pegA, pegB, pegC);
 
 		int option1 = inputInteger("Enter the peg you want to move a disk from(1 = A, 2 = B, 3 = C, 4 to Quit): ", 1, 4);
-		if (option1 == 4 )
+		if (option1 == 4)
 		{
 			return;
 		}
@@ -152,7 +147,7 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC, int numberO
 		}
 		else if (option1 == 2 && option2 == 3)
 		{
-			if (pegB.size() == 0 )
+			if (pegB.size() == 0)
 			{
 				cout << "Pillar is empyt..." << endl;
 			}
@@ -178,7 +173,7 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC, int numberO
 		}
 		else if (option1 == 3)
 		{
-			if (pegC.size() == 0 )
+			if (pegC.size() == 0)
 			{
 				cout << "Pillar is empyt..." << endl;
 			}
@@ -191,7 +186,7 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC, int numberO
 		}
 		else if (option1 == 3)
 		{
-			if (pegC.size() == 0 )
+			if (pegC.size() == 0)
 			{
 				cout << "Pillars are empyt..." << endl;
 			}
@@ -203,33 +198,25 @@ void moveFunction(stack<int> pegA, stack<int> pegB, stack<int> pegC, int numberO
 
 		}
 
+		numberOfMoves++;
+
 		if (checkIfComplete(pegC, numberOfdisk))
 		{
 			cout << " YOU WON!!!" << endl;
-		}
+			cout << "Number of Moves taken: " << numberOfMoves << endl;
+			auto end = chrono::steady_clock::now();
+			double elpasedTime = double(chrono::duration_cast<chrono::seconds> (end - start).count());
+			cout << "Time taken: " << elpasedTime << endl;
 
+			doAgain = inputStatus("do you want to try again (y = yes and n = no):", 'Y', 'N');
+			if (doAgain == 'Y')
+			{
+				resetTowerOfHanoi(pegA, pegC);
+			}
+			else
+				break;
+		}
 		cout << endl;
 	} while (true);
-}
-
-
-
-
-
-void towerOfHanoi()
-{
-	stack<int> pegA;
-	stack<int> pegB;
-	stack<int> pegC;
-
-	int numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
-
-	for(int i = numberOfdisk; i > 0; i--)
-	{
-		pegA.push(i);
-	}
-
-
-	moveFunction(pegA, pegB, pegC, numberOfdisk);
 }
 
