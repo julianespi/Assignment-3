@@ -36,47 +36,63 @@ bool checkIfComplete(vector<int> pegC,int numberOfdisk)
 void DisplayTowers(vector<int> pegA, vector<int> pegB, vector<int> pegC, int numberOfDisk)
 {
 	stack<int> temp;
+	int devation = 0;
 
-	for (int i = 0; i < numberOfDisk+1; i++)
+	for (int i = 0; i < numberOfDisk + 1; i++)
 	{
+
+
+		devation = numberOfDisk - pegA.size();
 		if (i == 0)
-			cout << setw(8) << "|" << setw(8) << setw(8) << "|" << setw(8) << setw(8) << "|" << setw(8) << endl;
+			cout << setw(8) << "|" << setw(8);
+		else if (devation > i)
+			cout << setw(8) << "|" << setw(8);
+		else if (pegA.size() != 0)
+		{
+
+			cout << setw(8) << pegA.back() << setw(8);
+			pegA.pop_back();
+		}
 		else
 		{
-			//temp = pegA;
-			if (pegA.size() != 0)
-			{
-				//cout << setw(8) << string(pegA.back(),(char)254u) << pegA.back() << string(pegA.back(), (char)254u) << setw(8);
-				cout << setw(8) <<  pegA.back() << setw(8);
-				pegA.pop_back();
-			}
-			else
-				cout << setw(8) << "|" << setw(8);
-
-			if (pegB.size() != 0)
-			{
-				//cout << setw(8) << string(pegB.back(), (char)254u) << pegB.back() << string(pegB.back(), (char)254u) << setw(8);
-				cout << setw(8) << pegB.back() << setw(8);
-				pegB.pop_back();
-			}
-			else
-				cout << setw(8) << "|" << setw(8);
-
-			
-			if (pegC.size() != 0)
-			{
-				//cout << setw(8) << string(pegC.back(), (char)254u) << pegC.back() << string(pegC.back(), (char)254u) << setw(8) << endl;
-				cout << setw(8) << pegC.back() << setw(8);
-				pegC.pop_back();
-			}
-			else
-				cout << setw(8) << "|" << setw(8);
-			cout << endl;
+			cout << setw(8) << "|" << setw(8);
 		}
+
+		devation = numberOfDisk - pegB.size();
+		if (i == 0)
+			cout << setw(8) << "|" << setw(8);
+		else if (devation > i)
+			cout << setw(8) << "|" << setw(8);
+		else if (pegB.size() != 0)
+		{
+
+			cout << setw(8) << pegB.back() << setw(8);
+			pegB.pop_back();
+		}
+		else
+		{
+			cout << setw(8) << "|" << setw(8);
+		}
+
+
+		devation = numberOfDisk - pegC.size();
+		if (i == 0)
+			cout << setw(8) << "|" << setw(8);
+		else if (devation > i)
+			cout << setw(8) << "|" << setw(8);
+		else if (pegC.size() != 0)
+		{
+			cout << setw(8) << pegC.back() << setw(8);
+			pegC.pop_back();
+		}
+		else
+		{
+			cout << setw(8) << "|" << setw(8);
+		}
+
+		cout << endl;
+
 	}
-
-
- 
 }
 
 void resetTowerOfHanoi(vector<int> &pegA, vector<int> &pegC, int &numberOfdisk)
