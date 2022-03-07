@@ -116,17 +116,7 @@ void towerOfHanoi()
 
 		else if (option1 == 1 && option2 == 1)
 		{
-			if (pegA.size() == 0)
-			{
-				cout << "Pillar is empyt..." << endl;
-			}
-			else if (pegA.size() == 0 || pegA.top() > pegA.top())
-			{
-				pegA.push(pegA.top());
-				pegA.pop();
-			}
-
-
+			cout << "Can not move from the same Pillar, try moving it to somehwere else..." << endl;
 		}
 		else if (option1 == 1 && option2 == 2)
 		{
@@ -139,6 +129,8 @@ void towerOfHanoi()
 				pegB.push(pegA.top());
 				pegA.pop();
 			}
+			else if (pegB.top() < pegA.top())
+				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
 		else if (option1 == 1 && option2 == 3)
@@ -152,6 +144,8 @@ void towerOfHanoi()
 				pegC.push(pegA.top());
 				pegA.pop();
 			}
+			else if (pegC.top() < pegA.top())
+				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
 		else if (option1 == 2 && option2 == 1)
@@ -165,20 +159,13 @@ void towerOfHanoi()
 				pegA.push(pegB.top());
 				pegB.pop();
 			}
+			else if (pegA.top() < pegB.top())
+				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
 		else if (option1 == 2 && option2 == 2)
 		{
-			if (pegB.size() == 0)
-			{
-				cout << "Pillar is empyt..." << endl;
-			}
-			else if (pegB.size() == 0 || pegB.top() > pegB.top())
-			{
-				pegB.push(pegB.top());
-				pegB.pop();
-			}
-
+			cout << "Can not move from the same Pillar, try moving it to somehwere else..." << endl;
 		}
 		else if (option1 == 2 && option2 == 3)
 		{
@@ -191,6 +178,8 @@ void towerOfHanoi()
 				pegC.push(pegB.top());
 				pegB.pop();
 			}
+			else if (pegC.top() < pegB.top())
+				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
 		else if (option1 == 3 && option2 == 1)
@@ -204,6 +193,8 @@ void towerOfHanoi()
 				pegA.push(pegC.top());
 				pegC.pop();
 			}
+			else if (pegA.top() < pegC.top())
+				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
 		else if (option1 == 3 && option2 == 2)
@@ -217,20 +208,13 @@ void towerOfHanoi()
 				pegB.push(pegC.top());
 				pegC.pop();
 			}
+			else if (pegB.top() < pegC.top())
+				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
 		else if (option1 == 3 && option2 == 3)
 		{
-			if (pegC.size() == 0)
-			{
-				cout << "Pillars are empyt..." << endl;
-			}
-			else if (pegC.size() == 0 || pegC.top() > pegC.top())
-			{
-				pegC.push(pegC.top());
-				pegC.pop();
-			}
-
+			cout << "Can not move from the same Pillar, try moving it to somehwere else..." << endl;
 		}
 
 		numberOfMoves++;
