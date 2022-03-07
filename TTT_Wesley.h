@@ -9,6 +9,9 @@ using namespace std;
 class TTT_W
 {
 private:
+	//First Turn
+	char firstTurn;
+
 	//2-D Array + Board filler: 0 = blank, 1 = Player, 2 = Computer
 	int ticBoard[3][4] = { {0,0,0,0}, {0,0,0,0}, {0,0,0,0} };
 
@@ -26,7 +29,11 @@ private:
 	bool bottomLeft = false;
 	bool bottomCenter = false;
 	bool bottomRight = false;
+
+	//game condition
 	bool winCondition = false;
+
+	//player or cpu
 	bool playerNow = false;
 
 	//Nine Squares: Selection
@@ -40,14 +47,26 @@ private:
 	int bottomC = 8;
 	int bottomR = 9;
 
+	//Filler
+	int turnSquare = 0;
 	char symbolInSpace = ' ';
 
 	//Turn counter
 	int turnCurrent = 0;
 
 	//random seed
-	srand(time(NULL));
+	/*srand(time(NULL));*/
 
 public:
-	char firstTurn = 'n';
+	//Setter
+	//precondition: user input for first player
+	//postcondition: firstTurn = 'n' || firstTurn = 'y'
+	void setFTurn(char ft);
+	//Getter
+	//precondition: firstTurn is set
+	//postcondition: get firstTurn
+	char getFTurn();
+	//precondition: firstTurn is set
+	//postcondition: runs a game of tic tac toe
+	char GameTTT(char firstTurn);
 };
