@@ -48,7 +48,7 @@ private:
 	int bottomR = 9;
 
 	//Filler
-	int turnSquare = 0;
+	int turnSquare ;
 	char symbolInSpace = ' ';
 
 	//Turn counter
@@ -58,6 +58,7 @@ private:
 	/*srand(time(NULL));*/
 
 public:
+	char whatever;
 	//Setter
 	//precondition: user input for first player
 	//postcondition: firstTurn = 'n' || firstTurn = 'y'
@@ -68,5 +69,6 @@ public:
 	char getFTurn();
 	//precondition: firstTurn is set
 	//postcondition: runs a game of tic tac toe
-	char GameTTT(char firstTurn);
+	//char GameTTT(char firstTurn);
+	char GameTTT(char whatever);
 };

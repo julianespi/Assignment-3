@@ -5,7 +5,6 @@
 #include <Windows.h>
 #include <iomanip>
 #include "TTT_Wesley.h"
-#include "input.h"
 
 using namespace std;
 //precondition: user input for ft
@@ -20,14 +19,11 @@ char TTT_W::getFTurn()
 {
     return firstTurn;
 }
-char TTT_W::GameTTT(char firstTurn)
+char TTT_W::GameTTT(char whatever)
 {
-    //precondition: none
-    //postcondition: firstTurn is set;
-    firstTurn = inputChar("Would you like to go first? Input yes or no : ", 'yes', 'no');
     //precondition: firstTurn is set;
     //postcondition: determines starting player
-    if (firstTurn == 'no')
+    if (firstTurn == 'n')
     {
         cout << "Computer will take the first move." << endl;
         Sleep(500); 	// delay for 500 milliseconds
@@ -39,9 +35,10 @@ char TTT_W::GameTTT(char firstTurn)
         playerNow = false;
         Sleep(500); 	// delay for 500 milliseconds
     }
-    //precondition: firstTurn is set;
+    //precondition: firstTurn is set
     //postcondition: determines starting player
-    if (firstTurn == 'yes') {
+    if (firstTurn == 'y') 
+    {
         cout << "Player will take the first move." << endl;
         Sleep(500); 	// delay for 500 milliseconds
         cout << "Computer's symbols will be an O." << endl;
@@ -51,6 +48,11 @@ char TTT_W::GameTTT(char firstTurn)
         turnCurrent = 1;
         playerNow = true;
         Sleep(500); 	// delay for 500 milliseconds
+    }
+    //precondition: firstTurn is set
+    //postcondition: input validation
+    if ((firstTurn != 'n') && (firstTurn != 'y')) {
+        cout << "Player has not given a valid answer";
     }
     //precondition: firstTurn = 'y' || 'n', winCondition == false
     //postcondition: game of Tic-Tac-Toe plays till winner
@@ -264,12 +266,14 @@ char TTT_W::GameTTT(char firstTurn)
         }
         //precondition: turnCurrent = 1, computer has gone
         //postcondition: player's turn
-        if ((turnCurrent == 1) && (playerNow == true)) {
+        if ((turnCurrent == 1) && (playerNow == true)) 
+        {
             cout << "Player's Turn." << endl;
             cout << "Board will be generated upon first move selection." << endl;
             //precondition: player's turn to input square coord
             //postcondition: valid coordinates set
-            turnSquare = inputInteger("Player select a number <1-9> to place your symbol in a square: ", 1, 9);
+            cout << "Player select a number <1-9> to place your symbol in a square: " << endl;
+            cin >> turnSquare;
             cout << endl;
             //precondition: turnSquare = 1
             //postcondition: coordinates on board are set
@@ -343,7 +347,8 @@ char TTT_W::GameTTT(char firstTurn)
                 y = 3;
                 //precondition: player's turn to input square coord
                 //postcondition: valid coordinates set
-                turnSquare = inputInteger("Player select a number <1-9> to place your symbol in a square: ", 1, 9);
+                cout << "Player select a number <1-9> to place your symbol in a square: " << endl;
+                cin >> turnSquare;
                 //precondition: turnSquare = 1
                 //postcondition: coordinates on board are set
                 if (turnSquare == 1) 
@@ -478,26 +483,32 @@ char TTT_W::GameTTT(char firstTurn)
         }
         //precondition: playerNow = false
         //postcondition: player's turn
-        if ((turnCurrent == 1) && (playerNow == false)) {
+        if ((turnCurrent == 1) && (playerNow == false)) 
+        {
             playerNow = true;
         }
 
         //Board Fill
-        if (upperLeft == true) {
-            if (ticBoard[0][0] == 2) {
+        if (upperLeft == true) 
+        {
+            if (ticBoard[0][0] == 2) 
+            {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << "|";
             }
-            if (ticBoard[0][0] == 1) {
+            if (ticBoard[0][0] == 1) 
+            {
                 symbolInSpace = 'X';
                 cout << symbolInSpace << "|";
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
-        if (upperCenter == true) {
+        if (upperCenter == true) 
+        {
             if (ticBoard[0][1] == 2) {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << "|";
@@ -507,111 +518,139 @@ char TTT_W::GameTTT(char firstTurn)
                 cout << symbolInSpace << "|";
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
-        if (upperRight == true) {
-            if (ticBoard[0][2] == 2) {
+        if (upperRight == true) 
+        {
+            if (ticBoard[0][2] == 2) 
+            {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << endl;
             }
-            if (ticBoard[0][2] == 1) {
+            if (ticBoard[0][2] == 1) 
+            {
                 symbolInSpace = 'X';
                 cout << symbolInSpace << endl;
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << endl;
         }
         cout << "------" << endl;
-        if (centerLeft == true) {
-            if (ticBoard[1][0] == 2) {
+        if (centerLeft == true) 
+        {
+            if (ticBoard[1][0] == 2) 
+            {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << "|";
             }
-            if (ticBoard[1][0] == 1) {
+            if (ticBoard[1][0] == 1) 
+            {
                 symbolInSpace = 'X';
                 cout << symbolInSpace << "|";
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
-        if (centerCenter == true) {
-            if (ticBoard[1][1] == 2) {
+        if (centerCenter == true) 
+        {
+            if (ticBoard[1][1] == 2) 
+            {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << "|";
             }
-            if (ticBoard[1][1] == 1) {
+            if (ticBoard[1][1] == 1) 
+            {
                 symbolInSpace = 'X';
                 cout << symbolInSpace << "|";
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
-        if (centerRight == true) {
-            if (ticBoard[1][2] == 2) {
+        if (centerRight == true) 
+        {
+            if (ticBoard[1][2] == 2) 
+            {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << endl;
             }
-            if (ticBoard[1][2] == 1) {
+            if (ticBoard[1][2] == 1) 
+            {
                 symbolInSpace = 'X';
                 cout << symbolInSpace << endl;
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << endl;
         }
         cout << "------" << endl;
-        if (bottomLeft == true) {
-            if (ticBoard[2][0] == 2) {
+        if (bottomLeft == true) 
+        {
+            if (ticBoard[2][0] == 2) 
+            {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << "|";
             }
-            if (ticBoard[2][0] == 1) {
+            if (ticBoard[2][0] == 1) 
+            {
                 symbolInSpace = 'X';
                 cout << symbolInSpace << "|";
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
-        if (bottomCenter == true) {
-            if (ticBoard[2][1] == 2) {
+        if (bottomCenter == true) 
+        {
+            if (ticBoard[2][1] == 2) 
+            {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << "|";
             }
-            if (ticBoard[2][1] == 1) {
+            if (ticBoard[2][1] == 1) 
+            {
                 symbolInSpace = 'X';
                 cout << symbolInSpace << "|";
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
-        if (bottomRight == true) {
-            if (ticBoard[2][2] == 2) {
+        if (bottomRight == true) 
+        {
+            if (ticBoard[2][2] == 2) 
+            {
                 symbolInSpace = 'O';
                 cout << symbolInSpace << endl << endl;
             }
-            if (ticBoard[2][2] == 1) {
+            if (ticBoard[2][2] == 1) 
+            {
                 symbolInSpace = 'X';
                 cout << symbolInSpace << endl << endl;
             }
         }
-        else {
+        else 
+        {
             symbolInSpace = ' ';
             cout << symbolInSpace << endl << endl;
         }
-
         //Winning Rows/Columns/Diagonals
         //precondition: a three in a row is detected made of "X"
         //postcondition: player wins
@@ -726,6 +765,6 @@ char TTT_W::GameTTT(char firstTurn)
                 cout << "Tie! Cat's Scratch, no one wins!";
             }
         }
-        return winCondition;
     }
+    return 0;
 }
