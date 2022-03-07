@@ -1,26 +1,26 @@
 #pragma once
 
-bool checkIfComplete(stack<int> pegC,int numberOfdisk)
+bool checkIfComplete(vector<int> pegC,int numberOfdisk)
 {
 	bool isComplete = false;
 
-	stack<int> winningStack;
-	stack<int> temp = pegC;
+	vector<int> winningStack;
+	vector<int> temp = pegC;
 
 	for (int i = numberOfdisk; i > 0; i--)
 	{
-		winningStack.push(i);
+		winningStack.push_back(i);
 	}
 	int stackSize = winningStack.size();
 	if (temp.size() == winningStack.size())
 	{
 		for (int i = 0; i < stackSize; i++)
 		{
-			if (temp.top() == winningStack.top())
+			if (temp.back() == winningStack.back())
 			{
 				
-				temp.pop();
-				winningStack.pop();
+				temp.pop_back();
+				winningStack.pop_back();
 				isComplete = true;
 			}
 			else
@@ -33,50 +33,63 @@ bool checkIfComplete(stack<int> pegC,int numberOfdisk)
 	return isComplete;
 }
 
-void DisplayTowers(stack<int> pegA, stack<int> pegB, stack<int> pegC)
+void DisplayTowers(vector<int> pegA, vector<int> pegB, vector<int> pegC, int numberOfDisk)
 {
 	stack<int> temp;
 
-
-	temp = pegA;
-	cout << "tower 1: ";
-	for (int i = 0; i < pegA.size(); i++)
+	for (int i = 0; i < numberOfDisk+1; i++)
 	{
-		cout << temp.top() << " ";
-		temp.pop();
-	}
-	cout << endl;
+		if (i == 0)
+			cout << setw(8) << "|" << setw(8) << setw(8) << "|" << setw(8) << setw(8) << "|" << setw(8) << endl;
+		else
+		{
+			//temp = pegA;
+			if (pegA.size() != 0)
+			{
+				//cout << setw(8) << string(pegA.back(),(char)254u) << pegA.back() << string(pegA.back(), (char)254u) << setw(8);
+				cout << setw(8) <<  pegA.back() << setw(8);
+				pegA.pop_back();
+			}
+			else
+				cout << setw(8) << "|" << setw(8);
 
-	temp = pegB;
-	cout << "tower 2: ";
-	for (int i = 0; i < pegB.size(); i++)
-	{
-		cout << temp.top() << " ";
-		temp.pop();
-	}
-	cout << endl;
+			if (pegB.size() != 0)
+			{
+				//cout << setw(8) << string(pegB.back(), (char)254u) << pegB.back() << string(pegB.back(), (char)254u) << setw(8);
+				cout << setw(8) << pegB.back() << setw(8);
+				pegB.pop_back();
+			}
+			else
+				cout << setw(8) << "|" << setw(8);
 
-	temp = pegC;
-	cout << "tower 3: ";
-	for (int i = 0; i < pegC.size(); i++)
-	{
-		cout << temp.top() << " ";
-		temp.pop();
+			
+			if (pegC.size() != 0)
+			{
+				//cout << setw(8) << string(pegC.back(), (char)254u) << pegC.back() << string(pegC.back(), (char)254u) << setw(8) << endl;
+				cout << setw(8) << pegC.back() << setw(8);
+				pegC.pop_back();
+			}
+			else
+				cout << setw(8) << "|" << setw(8);
+			cout << endl;
+		}
 	}
-	cout << endl;
+
+
+ 
 }
 
-void resetTowerOfHanoi(stack<int> &pegA, stack<int> &pegC, int &numberOfdisk)
+void resetTowerOfHanoi(vector<int> &pegA, vector<int> &pegC, int &numberOfdisk)
 {
 	int size = pegC.size();
 	for (int i = 0; i < size; i++)
-		pegC.pop();
+		pegC.pop_back();
 
 	numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
 
 	for (int i = numberOfdisk; i > 0; i--)
 	{
-		pegA.push(i);
+		pegA.push_back(i);
 	}
 
 }
@@ -95,9 +108,9 @@ void towerOfHanoi()
 		<< "\t   placing it on top of another stack or on an empty peg." << endl
 		<< "\t3. No larger disk may be placed on top of a smaller disk." << endl << endl;
 
-	stack<int> pegA;
-	stack<int> pegB;
-	stack<int> pegC;
+	vector<int> pegA;
+	vector<int> pegB;
+	vector<int> pegC;
 	int numberOfMoves = 0;
 	
 	char doAgain;
@@ -106,14 +119,14 @@ void towerOfHanoi()
 
 	for(int i = numberOfdisk; i > 0; i--)
 	{
-		pegA.push(i);
+		pegA.push_back(i);
 	}
 	auto start = chrono::steady_clock::now();
 
 	do
 	{
 		
-		DisplayTowers(pegA, pegB, pegC);
+		DisplayTowers(pegA, pegB, pegC, numberOfdisk);
 
 		int option1 = inputInteger("Enter the peg you want to move a disk from(1 = A, 2 = B, 3 = C, 4 to Quit): ", 1, 4);
 		if (option1 == 4)
@@ -136,12 +149,12 @@ void towerOfHanoi()
 			{
 				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegB.size() == 0 || pegB.top() > pegA.top())
+			else if (pegB.size() == 0 || pegB.back() > pegA.back())
 			{
-				pegB.push(pegA.top());
-				pegA.pop();
+				pegB.push_back(pegA.back());
+				pegA.pop_back();
 			}
-			else if (pegB.top() < pegA.top())
+			else if (pegB.back() < pegA.back())
 				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
@@ -151,12 +164,12 @@ void towerOfHanoi()
 			{
 				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegC.size() == 0 || pegC.top() > pegA.top())
+			else if (pegC.size() == 0 || pegC.back() > pegA.back())
 			{
-				pegC.push(pegA.top());
-				pegA.pop();
+				pegC.push_back(pegA.back());
+				pegA.pop_back();
 			}
-			else if (pegC.top() < pegA.top())
+			else if (pegC.back() < pegA.back())
 				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
@@ -166,12 +179,12 @@ void towerOfHanoi()
 			{
 				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegA.size() == 0 || pegA.top() > pegB.top())
+			else if (pegA.size() == 0 || pegA.back() > pegB.back())
 			{
-				pegA.push(pegB.top());
-				pegB.pop();
+				pegA.push_back(pegB.back());
+				pegB.pop_back();
 			}
-			else if (pegA.top() < pegB.top())
+			else if (pegA.back() < pegB.back())
 				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
@@ -185,12 +198,12 @@ void towerOfHanoi()
 			{
 				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegC.size() == 0 || pegC.top() > pegB.top())
+			else if (pegC.size() == 0 || pegC.back() > pegB.back())
 			{
-				pegC.push(pegB.top());
-				pegB.pop();
+				pegC.push_back(pegB.back());
+				pegB.pop_back();
 			}
-			else if (pegC.top() < pegB.top())
+			else if (pegC.back() < pegB.back())
 				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
@@ -200,12 +213,12 @@ void towerOfHanoi()
 			{
 				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegA.size() == 0 || pegA.top() > pegC.top())
+			else if (pegA.size() == 0 || pegA.back() > pegC.back())
 			{
-				pegA.push(pegC.top());
-				pegC.pop();
+				pegA.push_back(pegC.back());
+				pegC.pop_back();
 			}
-			else if (pegA.top() < pegC.top())
+			else if (pegA.back() < pegC.back())
 				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
@@ -215,12 +228,12 @@ void towerOfHanoi()
 			{
 				cout << "Pillar is empyt..." << endl;
 			}
-			else if (pegB.size() == 0 || pegB.top() > pegC.top())
+			else if (pegB.size() == 0 || pegB.back() > pegC.back())
 			{
-				pegB.push(pegC.top());
-				pegC.pop();
+				pegB.push_back(pegC.back());
+				pegC.pop_back();
 			}
-			else if (pegB.top() < pegC.top())
+			else if (pegB.back() < pegC.back())
 				cout << "Cannot move a bigger plate over a smaller plate..." << endl;
 
 		}
