@@ -33,13 +33,46 @@ bool checkIfComplete(stack<int> pegC,int numberOfdisk)
 	return isComplete;
 }
 
-void resetTowerOfHanoi(stack<int> &pegA, stack<int> &pegC)
+void DisplayTowers(stack<int> pegA, stack<int> pegB, stack<int> pegC)
+{
+	stack<int> temp;
+
+
+	temp = pegA;
+	cout << "tower 1: ";
+	for (int i = 0; i < pegA.size(); i++)
+	{
+		cout << temp.top() << " ";
+		temp.pop();
+	}
+	cout << endl;
+
+	temp = pegB;
+	cout << "tower 2: ";
+	for (int i = 0; i < pegB.size(); i++)
+	{
+		cout << temp.top() << " ";
+		temp.pop();
+	}
+	cout << endl;
+
+	temp = pegC;
+	cout << "tower 3: ";
+	for (int i = 0; i < pegC.size(); i++)
+	{
+		cout << temp.top() << " ";
+		temp.pop();
+	}
+	cout << endl;
+}
+
+void resetTowerOfHanoi(stack<int> &pegA, stack<int> &pegC, int &numberOfdisk)
 {
 	int size = pegC.size();
 	for (int i = 0; i < size; i++)
 		pegC.pop();
 
-	int numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
+	numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
 
 	for (int i = numberOfdisk; i > 0; i--)
 	{
@@ -54,7 +87,7 @@ void towerOfHanoi()
 	stack<int> pegB;
 	stack<int> pegC;
 	int numberOfMoves = 0;
-	auto start = chrono::steady_clock::now();
+	
 	char doAgain;
 
 	int numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
@@ -63,9 +96,11 @@ void towerOfHanoi()
 	{
 		pegA.push(i);
 	}
+	auto start = chrono::steady_clock::now();
 
 	do
 	{
+		
 		DisplayTowers(pegA, pegB, pegC);
 
 		int option1 = inputInteger("Enter the peg you want to move a disk from(1 = A, 2 = B, 3 = C, 4 to Quit): ", 1, 4);
@@ -171,7 +206,7 @@ void towerOfHanoi()
 			}
 
 		}
-		else if (option1 == 3)
+		else if (option1 == 3 && option2 == 2)
 		{
 			if (pegC.size() == 0)
 			{
@@ -184,7 +219,7 @@ void towerOfHanoi()
 			}
 
 		}
-		else if (option1 == 3)
+		else if (option1 == 3 && option2 == 3)
 		{
 			if (pegC.size() == 0)
 			{
@@ -200,23 +235,24 @@ void towerOfHanoi()
 
 		numberOfMoves++;
 
-		if (checkIfComplete(pegC, numberOfdisk))
+		if (checkIfComplete(pegC,numberOfdisk))
 		{
+			cout << endl << endl;
 			cout << " YOU WON!!!" << endl;
 			cout << "Number of Moves taken: " << numberOfMoves << endl;
 			auto end = chrono::steady_clock::now();
 			double elpasedTime = double(chrono::duration_cast<chrono::seconds> (end - start).count());
 			cout << "Time taken: " << elpasedTime << endl;
+			cout << endl << endl;
 
 			doAgain = inputStatus("do you want to try again (y = yes and n = no):", 'Y', 'N');
 			if (doAgain == 'Y')
 			{
-				resetTowerOfHanoi(pegA, pegC);
+				resetTowerOfHanoi(pegA, pegC, numberOfdisk);
+				start = chrono::steady_clock::now();
 			}
-			else
-				break;
+			else break;
 		}
 		cout << endl;
 	} while (true);
 }
-
