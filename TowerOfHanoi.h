@@ -83,6 +83,18 @@ void resetTowerOfHanoi(stack<int> &pegA, stack<int> &pegC, int &numberOfdisk)
 
 void towerOfHanoi()
 {
+
+	cout << "The Tower of Hanoi also called the Tower of Brahma or Lucas' Tower is a mathematical game." << endl
+		<< "It consists of three pegs and a number of rings of different sizes, which can slide onto" << endl
+		<< "any peg. The game starts with the rings in a neat stack in ascending order of size on one" << endl
+		<< "peg, the smallest at the top, thus making a conical shape." << endl << endl
+		<< "The objective of the game is to move the entire stack from the starting peg-A to ending peg-B," << endl
+		<< "obeying the following simple rules:" << endl << endl
+		<< "\t1. Only one disk can be moved at a time." << endl
+		<< "\t2. Each move consists of taking the upper disk from one of the stacks and" << endl
+		<< "\t   placing it on top of another stack or on an empty peg." << endl
+		<< "\t3. No larger disk may be placed on top of a smaller disk." << endl << endl;
+
 	stack<int> pegA;
 	stack<int> pegB;
 	stack<int> pegC;
