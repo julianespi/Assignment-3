@@ -19,7 +19,7 @@ char TTT_W::getFTurn()
 {
     return firstTurn;
 }
-char TTT_W::GameTTT(char whatever)
+void TTT_W::GameTTT()
 {
     //precondition: firstTurn is set;
     //postcondition: determines starting player
@@ -766,5 +766,4 @@ char TTT_W::GameTTT(char whatever)
             }
         }
     }
-    return 0;
 }
