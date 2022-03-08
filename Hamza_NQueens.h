@@ -1,98 +1,122 @@
 //N Queens by Hamza Patel
-#pragma warning
 #include <iostream>
 #include <math.h>
+#include "input.h"
 using namespace std;
 
-int i, j, n;
-int a[20][20];
-int row, col;
 
-//function to print the board
-//issues with this one
-int PrintBoard()
+
+
+int main()
 {
-	for (i = 1;i <= n;i++)
-	{
-		for (j = 1;j <= n;j++)
-		{
-			a[i][j] = '-';
-		}
-	}
-	return 0;
+    
+    cout << "N Queen Program\n";
 
-}
-//function that prints the array
-int PrintArray()
-{
-	for (i = 1;i <= n;i++)
-	{
-		for (j = 1;j <= n;j++)
-		{
-			cout<< " ", a[i][j];
-		}
-		cout << "  ";
-	}
-	cout << "  ";
-	return 0;
-}
-//function to place queen
-int PlaceQueen(int row, int col)
-{
-	a[row][col] = 'Q';
-	return 0;
-}
-
-//function that checks if Q can be placed or not
-//Does not work yet
-int RowChecker(int row, int col)
-{
-	int i, j, flag{};
-	for (i = 1;i <= row;i++)
-	{
-		for (j = 1;j <= n;j++)
-		{
-			int k = abs(row - i);
-			int l = abs(col - n);
-			if (a[i][col] != 'Q' && a[k][l] != 'Q')
-			{
-				flag = 1;
-			}
-			else
-			{
-				flag = 0;
-				break;
-			}
-		}
-	}
-	return flag;
-}
+    int sizeOfBoard = inputInteger("Enter the size of the board you want to play on: ", 1, 10);
 
 
-int main(void)
-{
-	cout << "Enter no. of queen(s): ";
-	cin >> n;
+    // this will be put into newQueen()
+        int row = inputInteger("\nEnter the row you want to put a queen: ", 1, sizeOfBoard);
+        int column = inputInteger("Enter the column you want to put a queen: ", 1, sizeOfBoard);
+    
 
-	PrintBoard();
+        
+        /*
+  newQueen();
+  deleteQueen();
 
-	for (i = 1;i <= n;i++)
-	{
-		cout << "Where would you like to place a queen?" << endl;
-		cout << "Enter Row: ";
-		cin >> row;
+    
+    int nQueenMenu();
+  
+    
+        do
+        {
+            switch (nQueenMenu())
+            {
+            case 0: exit(1); break;
+           // case 1: newQueen(); break;
+           // case 2: deleteQueen(); break;
+            default: cout << "\t\tERROR - Invalid option. Please re-enter."; break;
+            }
+            cout << "\n";
+            system("pause");
 
-		cout << "Enter Column: ";
-		cin >> col;
+        } while (true);
+    
 
-		if (RowChecker(row, col) == 1)
-		{
-			PlaceQueen(row, col);
-		}
+    //Precondition:none
+    //PostCondition:displays the main menu
+    int nQueenMenu();
+    {
+        cout << endl << "N Queen Program";
+        cout << endl << "-------------------------------------------";
+        cout << endl << "0. Exit";
+        cout << endl << "1. Place a new Queen";
+        cout << endl << "2. Remove Queen";
+        cout << endl << "-------------------------------------------" << endl;
+        int options = inputInteger("Options: ", 0, 2);
+        cout << endl << endl << endl;
+        return options;
+    }
+    */
 
-	}
-	PrintArray();
 
 
-	
+
+
+    {
+        string** nQueens = new string * [sizeOfBoard];
+
+        for (int i = 0; i < sizeOfBoard; i++) {
+
+            // Declare a memory block
+            // of size sizeOfBoard
+            nQueens[i] = new string[sizeOfBoard];
+        }
+
+        // Traverse the 2D array
+        for (int i = 0; i < sizeOfBoard; i++) {
+            for (int j = 0; j < sizeOfBoard; j++) {
+
+                // Assign values to the
+                // memory blocks created
+                nQueens[i][j] = " ";
+                
+            }
+        }
+
+
+            nQueens[row - 1][column - 1] = "Q";
+
+    
+        // Traverse the 2D array
+        for (int i = 0; i < sizeOfBoard; i++) {
+            for (int j = 0; j < sizeOfBoard; j++) {
+                if (j == 0)
+                    cout << "|";
+                // Print values of the
+                // memory block
+                cout << nQueens[i][j]
+                    << "|";
+                if (j == sizeOfBoard - 1)
+                    cout << endl;
+            }
+            for (int i = 0; i < sizeOfBoard; i++)
+            {
+                if (i == 0)
+                    cout << "-";
+                cout << "--";
+                if (i == sizeOfBoard - 1)
+                    cout << endl;
+            }
+        }
+
+        //Delete the array created
+        for (int i = 0; i < sizeOfBoard; i++)    //To delete the inner arrays
+            delete[] nQueens[i];
+        delete[] nQueens;
+
+    }
+    
+
 }
