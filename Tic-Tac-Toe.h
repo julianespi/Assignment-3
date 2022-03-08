@@ -2,5 +2,5 @@
 TTT_W game;
 char ft = inputChar("put y or n ",'y','n');
 game.setFTurn(ft);
-game.GameTTT(game.whatever);
+game.GameTTT();
 return 0;
