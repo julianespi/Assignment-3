@@ -69,4 +69,7 @@ public:
 	//precondition: firstTurn is set
 	//postcondition: runs a game of tic tac toe
 	void GameTTT();
+	//PreCondition: startRange (integer) and endRange (integer)
+	//PostCondition: returns an integer value within range (startRannge and endRange)
+	int inputInteger(string prompt, int startRange, int endRange);
 };
