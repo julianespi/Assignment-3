@@ -8,7 +8,7 @@ void displayBoard(int**nQueens, int sizeOfBoard)
         for (int j = 0; j < sizeOfBoard; j++) {
             if (j == 0)
                 cout << "|";
-            if (nQueens[i][j] == 9)
+            if (nQueens[i][j] == QUEENSVLAUE)
                 cout << "Q";
             else if (nQueens[i][j] > 0)
                 cout << "*";
@@ -53,7 +53,7 @@ void displayBoardValues(int** nQueens, int sizeOfBoard)
     }
 }
 
-void addQueen(int **&nQueens, int sizeOfBoard)
+void addQueen(int **&nQueens, int sizeOfBoard, int &numberOfQueensOnBoard)
 {
     int row = inputInteger("enter the row you want to put a queen: ", 1, sizeOfBoard) - 1;
     int coloum = inputInteger("enter the coloum you want to put a queen: ", 1, sizeOfBoard) - 1;
@@ -61,20 +61,22 @@ void addQueen(int **&nQueens, int sizeOfBoard)
     displayBoardValues(nQueens, sizeOfBoard);
     cout << endl << endl;
 
-        if (nQueens[row][coloum] == QUEENSVLAUE)
-        {
-            cout << "Invalid. A queen is already placed here. Try Again." << endl;
-            return;
-        }
-        else if (nQueens[row][coloum] > 0) 
-        {
-            cout << "Invalid. in the path of a current Queen. Try Again." << endl;
-            return;
-        }
-        else 
-            nQueens[row][coloum] = QUEENSVLAUE;
-
-    
+    if (nQueens[row][coloum] == QUEENSVLAUE)
+    {
+        cout << "Invalid. A queen is already placed here. Try Again." << endl;
+        return;
+    }
+    else if (nQueens[row][coloum] > 0)
+    {
+        cout << "Invalid. in the path of a current Queen. Try Again." << endl;
+        return;
+    }
+    else
+    {
+        nQueens[row][coloum] = QUEENSVLAUE;
+        numberOfQueensOnBoard++;
+    }
+           
 
     for (int i = 0; i < sizeOfBoard; i++)
     {
@@ -170,11 +172,35 @@ void addQueen(int **&nQueens, int sizeOfBoard)
 
 }
 
-void removeQueen(int **&nQueens, int sizeOfBoard)
+void removeQueen(int **&nQueens, int sizeOfBoard, int &numberOfQueensOnBoard)
 {
+    if (numberOfQueensOnBoard == 0)
+    {
+        cout << "Put atleast one queen on the board before you try to remove one..." << endl;
+        return;
+    }
+
+
     int row = inputInteger("enter the row you want to put a queen: ", 1, sizeOfBoard) - 1;
     int coloum = inputInteger("enter the coloum you want to put a queen: ", 1, sizeOfBoard) - 1;
+
+    if (nQueens[row][coloum] == QUEENSVLAUE)
+    {
+        nQueens[row][coloum] = 0;
+    }
+    else if (nQueens[row][coloum] > 0)
+    {
+        cout << "Invalid. This is a Queens path not a Queen. Try Again." << endl;
+        return;
+    }
+    else
+    {
+        cout << "Invalid. This is a blank space. Try Again." << endl;
+        return;
+    }
+
     nQueens[row][coloum] = 0;
+    numberOfQueensOnBoard--;
 
     for (int i = 0; i < sizeOfBoard; i++)
     {
@@ -284,7 +310,7 @@ int nQueenMenu()
 void nQueensGame()
 {
     int sizeOfBoard = inputInteger("Enter the size of the bored you want to play on: ", 1, 10);
-
+    int numberOfQueensOnBoard = 0;
     int** nQueens = new int * [sizeOfBoard];
 
     //creates the array and fills the array with blank spaces
@@ -310,8 +336,8 @@ void nQueensGame()
         switch (nQueenMenu())
         {
         case 0: return; break;
-        case 1: addQueen(nQueens, sizeOfBoard); break;
-        case 2: removeQueen(nQueens, sizeOfBoard); break;
+        case 1: addQueen(nQueens, sizeOfBoard, numberOfQueensOnBoard); break;
+        case 2: removeQueen(nQueens, sizeOfBoard, numberOfQueensOnBoard); break;
         default: cout << "\t\tERROR - Invalid option. Please re-enter."; break;
         }
         cout << "\n";
@@ -324,4 +350,3 @@ void nQueensGame()
         delete[] nQueens[i];
     delete[] nQueens;
 }
-;
