@@ -74,7 +74,8 @@ void addQueen(string**& nQueens, int sizeOfBoard)
 
 
 
-    //handles diagonal line going bottom right.
+   //handles diagonal line going bottom right.
+   //all diagnal lines  
     int temp1 = -1;
     for (int i = row; i < sizeOfBoard; i++)
     {
@@ -91,9 +92,64 @@ void addQueen(string**& nQueens, int sizeOfBoard)
                     nQueens[i][j] = "*";
             }
 
-     
         }
-       
+    }
+
+    temp1 = -1;
+    for (int i = row; i > -1; i--)
+    {
+        temp1++;
+        if (i <= -1)
+            break;
+        for (int j = coloum; j > -1; j--) {
+
+            if (j <= -1)
+                break;
+            if (i == row - temp1 && j == coloum - temp1)
+            {
+                if (row != i && coloum != j)
+                    nQueens[i][j] = "*";
+            }
+
+        }
+    }
+
+    temp1 = -1;
+    for (int i = row; i < sizeOfBoard; i++)
+    {
+        temp1++;
+        if (i >= sizeOfBoard)
+            break;
+        for (int j = coloum; j > -1; j--) {
+
+            if (j <= -1)
+                break;
+            if (i == row + temp1 && j == coloum - temp1)
+            {
+                if (row != i && coloum != j)
+                    nQueens[i][j] = "*";
+            }
+
+        }
+    }
+
+    temp1 = -1;
+    for (int i = row; i > -1; i--)
+    {
+        temp1++;
+        if (i <= -1)
+            break;
+        for (int j = coloum; j < sizeOfBoard; j++) {
+
+            if (j >= sizeOfBoard)
+                break;
+            if (i == row - temp1 && j == coloum + temp1)
+            {
+                if (row != i && coloum != j)
+                    nQueens[i][j] = "*";
+            }
+
+        }
     }
 
  
