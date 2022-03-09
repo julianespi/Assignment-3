@@ -54,9 +54,6 @@ private:
 	//Turn counter
 	int turnCurrent = 0;
 
-	//random seed
-	/*srand(time(NULL));*/
-
 public:
 	//Setter
 	//precondition: user input for first player
