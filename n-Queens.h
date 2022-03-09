@@ -1,9 +1,30 @@
 #pragma once
 const int QUEENSVLAUE = 100;
 
+bool endGame(int** nQueens, int sizeOfBoard, int numberOfQueensOnBoard)
+{
+    cout << endl << "\tYou have entered this many queens: " << numberOfQueensOnBoard;
+    cout << endl << endl << endl;
+    if (numberOfQueensOnBoard == sizeOfBoard)
+    {
+        cout << "Congrats you win!" << endl;
+        return true;
+    }
+
+    for (int i = 0; i < sizeOfBoard; i++) {
+        for (int j = 0; j < sizeOfBoard; j++) {
+
+            if (nQueens[i][j] == 0)
+            {
+                return false;
+            }
+        }
+    }
+}
+
 //Precondition: takes input user from board size
 //Postcondition: displays board size based upon user input
-void displayBoard(int** nQueens, int sizeOfBoard)
+void displayBoard(int**nQueens, int sizeOfBoard)
 {
     // displays the bored
     for (int i = 0; i < sizeOfBoard; i++) {
@@ -16,7 +37,7 @@ void displayBoard(int** nQueens, int sizeOfBoard)
                 cout << "*";
             else
                 cout << " ";
-            cout << "|";
+                 cout << "|";
             if (j == sizeOfBoard - 1)
                 cout << endl;
         }
@@ -32,41 +53,10 @@ void displayBoard(int** nQueens, int sizeOfBoard)
 }
 //Precondition: takes input user from board size
 //Postcondition: displays the values of the board
-void displayBoardValues(int** nQueens, int sizeOfBoard)
-{
-    // displays the bored
-    for (int i = 0; i < sizeOfBoard; i++) {
-        for (int j = 0; j < sizeOfBoard; j++) {
-            if (j == 0)
-                cout << "|";
-
-            cout << nQueens[i][j] << " ";
-            cout << "|";
-            if (j == sizeOfBoard - 1)
-                cout << endl;
-        }
-        for (int i = 0; i < sizeOfBoard; i++)
-        {
-            if (i == 0)
-                cout << "-";
-            cout << "--";
-            if (i == sizeOfBoard - 1)
-                cout << endl;
-        }
-    }
-}
-
-//Precondition: asks user to placea queen in row and column
-//Postcondition: places queen in desired row and column
-void addQueen(int**& nQueens, int sizeOfBoard, int& numberOfQueensOnBoard)
+void addQueen(int **&nQueens, int sizeOfBoard, int &numberOfQueensOnBoard)
 {
     int row = inputInteger("enter the row you want to put a queen: ", 1, sizeOfBoard) - 1;
     int coloum = inputInteger("enter the coloum you want to put a queen: ", 1, sizeOfBoard) - 1;
-
-    
-
-    displayBoardValues(nQueens, sizeOfBoard);
-    cout << endl << endl;
 
     if (nQueens[row][coloum] == QUEENSVLAUE)
     {
@@ -83,7 +73,7 @@ void addQueen(int**& nQueens, int sizeOfBoard, int& numberOfQueensOnBoard)
         nQueens[row][coloum] = QUEENSVLAUE;
         numberOfQueensOnBoard++;
     }
-
+           
 
     for (int i = 0; i < sizeOfBoard; i++)
     {
@@ -100,16 +90,16 @@ void addQueen(int**& nQueens, int sizeOfBoard, int& numberOfQueensOnBoard)
 
     //handle diagonal line going bottom right.
     int temp1 = -1;
-    for (int i = row; i < sizeOfBoard; i++)
+    for (int i = row; i < sizeOfBoard; i++) 
     {
         temp1++;
         if (i >= sizeOfBoard)
             break;
         for (int j = coloum; j < sizeOfBoard; j++) {
-
+            
             if (j >= sizeOfBoard)
                 break;
-            if (i == row + temp1 && j == coloum + temp1)
+            if(i == row +temp1 && j == coloum + temp1)
             {
                 if (row != i && coloum != j)
                     nQueens[i][j] += 1;
@@ -176,21 +166,11 @@ void addQueen(int**& nQueens, int sizeOfBoard, int& numberOfQueensOnBoard)
     }
 
     displayBoard(nQueens, sizeOfBoard);
-    
-    //Precondition: validation check to see if n queens is solved
-    //Postcondition: displays winning message
-    if (numberOfQueensOnBoard == sizeOfBoard)
-    {
-        cout << "\nYou win the N-Queen Game!";
-   
-        return;
-    }
 
 }
-
 //Precondition: asks user which row and column the program should delete a queen
 //Postcondition: deletes queen from selected row and column
-void removeQueen(int**& nQueens, int sizeOfBoard, int& numberOfQueensOnBoard)
+void removeQueen(int **&nQueens, int sizeOfBoard, int &numberOfQueensOnBoard)
 {
     if (numberOfQueensOnBoard == 0)
     {
@@ -199,8 +179,8 @@ void removeQueen(int**& nQueens, int sizeOfBoard, int& numberOfQueensOnBoard)
     }
 
 
-    int row = inputInteger("enter the row you want to put a queen: ", 1, sizeOfBoard) - 1;
-    int coloum = inputInteger("enter the coloum you want to put a queen: ", 1, sizeOfBoard) - 1;
+    int row = inputInteger("enter the row you want to remove a queen from: ", 1, sizeOfBoard) - 1;
+    int coloum = inputInteger("enter the coloum you want to  remove a queen from: ", 1, sizeOfBoard) - 1;
 
     if (nQueens[row][coloum] == QUEENSVLAUE)
     {
@@ -326,17 +306,14 @@ int nQueenMenu()
     cout << endl << endl << endl;
     return options;
 }
+
 //Precondition: user input n-queen game
 //Postcondition: opens up NQueens Game
 void nQueensGame()
 {
     int sizeOfBoard = inputInteger("Enter the size of the bored you want to play on: ", 1, 10);
     int numberOfQueensOnBoard = 0;
-    int** nQueens = new int* [sizeOfBoard];
-
-
-    
-
+    int** nQueens = new int * [sizeOfBoard];
 
     //creates the array and fills the array with blank spaces
     for (int i = 0; i < sizeOfBoard; i++) {
@@ -368,7 +345,7 @@ void nQueensGame()
         cout << "\n";
         system("pause");
 
-    } while (true);
+    } while (endGame(nQueens, sizeOfBoard, numberOfQueensOnBoard)== false);
 
     //Delete the array created
     for (int i = 0; i < sizeOfBoard; i++)    //To delete the inner arrays
