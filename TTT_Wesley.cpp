@@ -489,6 +489,8 @@ void TTT_W::GameTTT()
         }
 
         //Board Fill
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (upperLeft == true) 
         {
             if (ticBoard[0][0] == 2) 
@@ -507,6 +509,8 @@ void TTT_W::GameTTT()
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (upperCenter == true) 
         {
             if (ticBoard[0][1] == 2) {
@@ -523,6 +527,8 @@ void TTT_W::GameTTT()
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (upperRight == true) 
         {
             if (ticBoard[0][2] == 2) 
@@ -542,6 +548,8 @@ void TTT_W::GameTTT()
             cout << symbolInSpace << endl;
         }
         cout << "------" << endl;
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (centerLeft == true) 
         {
             if (ticBoard[1][0] == 2) 
@@ -560,6 +568,8 @@ void TTT_W::GameTTT()
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (centerCenter == true) 
         {
             if (ticBoard[1][1] == 2) 
@@ -578,6 +588,8 @@ void TTT_W::GameTTT()
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (centerRight == true) 
         {
             if (ticBoard[1][2] == 2) 
@@ -597,6 +609,8 @@ void TTT_W::GameTTT()
             cout << symbolInSpace << endl;
         }
         cout << "------" << endl;
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (bottomLeft == true) 
         {
             if (ticBoard[2][0] == 2) 
@@ -615,6 +629,8 @@ void TTT_W::GameTTT()
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (bottomCenter == true) 
         {
             if (ticBoard[2][1] == 2) 
@@ -633,6 +649,8 @@ void TTT_W::GameTTT()
             symbolInSpace = ' ';
             cout << symbolInSpace << "|";
         }
+        //precondition: player or computer takes turn
+        //postcondition: state of game is updated
         if (bottomRight == true) 
         {
             if (ticBoard[2][2] == 2) 
