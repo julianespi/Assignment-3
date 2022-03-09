@@ -181,8 +181,8 @@ void removeQueen(int **&nQueens, int sizeOfBoard, int &numberOfQueensOnBoard)
     }
 
 
-    int row = inputInteger("enter the row you want to put a queen: ", 1, sizeOfBoard) - 1;
-    int coloum = inputInteger("enter the coloum you want to put a queen: ", 1, sizeOfBoard) - 1;
+    int row = inputInteger("enter the row you want to remove a queen from: ", 1, sizeOfBoard) - 1;
+    int coloum = inputInteger("enter the coloum you want to  remove a queen from: ", 1, sizeOfBoard) - 1;
 
     if (nQueens[row][coloum] == QUEENSVLAUE)
     {
