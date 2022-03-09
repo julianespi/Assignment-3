@@ -1,5 +1,6 @@
 #pragma once
-
+//Precondition: reads the winning stack + numberofdisks 
+//Postcondition: checks to see if the winning stack is complete
 bool checkIfComplete(vector<int> pegC,int numberOfdisk)
 {
 	bool isComplete = false;
@@ -33,6 +34,8 @@ bool checkIfComplete(vector<int> pegC,int numberOfdisk)
 	return isComplete;
 }
 
+//Precondition: NA
+//Postcondition: Displays the towers of hanoi
 void DisplayTowers(vector<int> pegA, vector<int> pegB, vector<int> pegC, int numberOfDisk)
 {
 	stack<int> temp;
@@ -95,6 +98,8 @@ void DisplayTowers(vector<int> pegA, vector<int> pegB, vector<int> pegC, int num
 	}
 }
 
+//Precondition:user input of how many disks 
+//Postcondition: sets the number of disks to play with
 void resetTowerOfHanoi(vector<int> &pegA, vector<int> &pegC, int &numberOfdisk)
 {
 	int size = pegC.size();
@@ -110,6 +115,8 @@ void resetTowerOfHanoi(vector<int> &pegA, vector<int> &pegC, int &numberOfdisk)
 
 }
 
+//Precondition: NA
+//Postcondition: Displays tower of hanoi menu
 void towerOfHanoi()
 {
 
