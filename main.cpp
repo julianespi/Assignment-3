@@ -1,8 +1,8 @@
-
 // Names of Group:
 // Julian Espinoza
 // Wesley Goo
 // Hamza Patel
+// Arturo Islas Mejia
 // Date: 2/16/2022
 
 #include <iostream>
@@ -44,7 +44,7 @@ int main()
 //PostCondition:displays the main menu
 int mainMenuOption()
 {
-    cout << endl << "Chapter 1: Assignment by Julian Espinoza";
+    cout << endl << "Chapter 1: Assignment by Julian Espinoza, Wesley Goo, Hamza Patel, Arturo Islas Mejia";
     cout << endl << "==========================================";
     cout << endl << "1. ticTacToe";
     cout << endl << "2. towerOfHanoi";
