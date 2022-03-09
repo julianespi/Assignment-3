@@ -7,6 +7,30 @@
 #include "TTT_Wesley.h"
 
 using namespace std;
+//PreCondition: startRange (integer) and endRange (integer)
+//PostCondition: returns an integer value within range (startRannge and endRange)
+int TTT_W::inputInteger(string prompt, int startRange, int endRange)
+{
+    int input;
+    do
+    {
+        cout << prompt;
+        if (!(cin >> input))
+        {
+            cout << "ERROR: Invalid input. Must be an integer type.\n";
+            cin.clear();
+            cin.ignore(999, '\n');
+        }
+        else if (!(input >= min(startRange, endRange) && input <= max(startRange, endRange)))
+            cout << "ERROR: Invalid input. Must be from " << startRange << ".." << endRange << ".\n";
+        else
+            break;
+    } while (true);
+    cin.clear();
+    cin.ignore(999, '\n');
+    return input;
+}
+
 //precondition: user input for ft
 //postcondition: firstTurn is set
 void TTT_W::setFTurn(char ft)
