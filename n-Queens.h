@@ -176,6 +176,15 @@ void addQueen(int**& nQueens, int sizeOfBoard, int& numberOfQueensOnBoard)
     }
 
     displayBoard(nQueens, sizeOfBoard);
+    
+    //Precondition: validation check to see if n queens is solved
+    //Postcondition: displays winning message
+    if (numberOfQueensOnBoard == sizeOfBoard)
+    {
+        cout << "\nYou win the N-Queen Game!";
+   
+        return;
+    }
 
 }
 
